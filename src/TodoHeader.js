@@ -6,7 +6,7 @@ class TodoHeader extends Component {
         return (
             <header id="header">
                 <h1>Todo-List</h1>
-                <input type="text"/>
+                <input type="text" placeholder="입력 후 엔터"/>
             </header>
         );
     };

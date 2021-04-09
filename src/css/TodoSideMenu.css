@@ -4,7 +4,6 @@
     flex: 1 1 20%;
     background: #9DC3C1;
     border-right: 1px solid #D4DFE6;
-    height: calc(100vh - 50px);
 }
 
 #sideMenu ul {

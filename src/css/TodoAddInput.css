@@ -1,0 +1,30 @@
+#addInputBox {
+    padding-bottom: 10px;
+    border-bottom: 2px solid #285943;
+}
+
+#addInputBox > label {
+    display: inline-block;
+    width: 30px;
+    cursor: pointer;
+    color: #285943;
+
+}
+
+#addInputBox > label > i {
+    margin-left: 10px;
+}
+
+#addInputBox > input {
+    width: calc(100% - 45px);
+    font-size: 18px;
+    line-height: 30px;
+    padding: 5px;
+    background: none;
+    color: #285943;
+    border: none;
+}
+
+#addInputBox > input:focus {
+    outline: none;
+}

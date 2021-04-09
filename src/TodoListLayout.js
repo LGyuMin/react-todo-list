@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import TodoHeader from './TodoHeader';
-import TodoSideMenu from './TodoSideMenu';
+import TodoBody from './TodoBody';
 
 class TodoListLayout extends Component {
     render() {
         return (
             <div>
                 <TodoHeader />
-                <TodoSideMenu />
+                <TodoBody />
             </div>
         );
     }
