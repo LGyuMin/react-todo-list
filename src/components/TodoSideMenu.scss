@@ -1,0 +1,40 @@
+.TodoSideMenu {
+    width: 30%;
+    float:left;
+    min-width: 50px;
+    max-width: 300px;
+    background: #9DC3C1;
+    border-right: 1px solid #D4DFE6;
+    height: calc(100vh - 50px);
+
+    ul {
+        width: 100%;
+
+        li {
+            width: 100%;
+            line-height: 50px;
+            padding: 0 15px;
+            box-sizing: border-box;
+            cursor: pointer;
+            color: #285943;
+            text-align: left;
+
+            &.selected {
+                background: #D4DFE6;
+                color: #000;
+
+                &:hover {
+                    background: #D4DFE6;
+                }
+            }
+
+            &:hover {
+                background: #ABD0CE
+            }
+
+            i {
+                margin-right: 20px;
+            }
+        }
+    }
+}

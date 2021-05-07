@@ -1,0 +1,77 @@
+.TodoItem {
+    padding: 20px 10px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #285943;
+
+    &:after {
+        content: '';
+        display: block;
+        clear: both;
+    }
+
+    >* {
+        float: left;
+        color: #285943;
+    }
+
+    label {
+        margin-right: 15px;
+        color: #6E7783;
+        cursor: pointer;
+
+        &.selected {
+            color: #285943;
+        }
+
+        &:hover {
+            color: #285943;
+        }
+    }
+
+    p {
+        cursor: pointer;
+        font-weight: bold;
+
+        &.selected {
+            text-decoration: line-through;
+        }
+    }
+
+    input[type="checkbox"] {
+        display: none;
+    }
+
+    input[type="text"] {
+        background: none;
+        font-size: 16px;
+        color: #000;
+        margin-top: 1px;
+        width: calc(100% - 110px);
+        border: none;
+        outline: none;
+        margin-top: 0;
+        height: 20px;
+
+        &:focus {
+            outline: none;;
+        }
+    }
+
+    .iconBox {
+        float: right;
+
+        i {
+            margin-left: 5px;
+            cursor: pointer;
+            color: #6E7783;
+
+            &.selected {
+                color: #285943;
+            }
+
+            &:hover {
+                color: #285943;
+            }
+        }
+    }
+}
