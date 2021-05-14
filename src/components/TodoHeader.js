@@ -6,7 +6,6 @@ const TodoTemplate = ({ onSetFilterOption }) => {
         const keyword = e.target.value;
 
         if(e.key === 'Enter') {
-            console.log(keyword);
             onSetFilterOption({keyword: keyword});
         }
     }
