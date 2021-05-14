@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useMemo } from 'react';
 import './App.css';
 import TodoHeader from './components/TodoHeader';
 import TodoSideMenu from './components/TodoSideMenu';
@@ -11,6 +11,10 @@ const App = () => {
     { id: 2, text: '영화 보기', isDone: false, isImportant: false },
     { id: 3, text: '아무것도 안하기', isDone: true, isImportant: true },
   ]);
+
+  const [ filterOption, setFilterOption ] = useState({
+      keyword: '', category: 'all', value: true
+  });
 
   const nextId = useRef(4);
 
@@ -47,17 +51,54 @@ const App = () => {
       )
     )
   }, [todos])
+
+  const onSetFilterOption = useCallback(newOption => {
+    const newFilterOption = {...filterOption};
+
+    for(const key in newFilterOption) {
+      newFilterOption[key] = newOption[key] !== undefined ? newOption[key] : newFilterOption[key];
+    }
+
+    setFilterOption(newFilterOption);
+  }, [filterOption])
+
+  const filteredTodos = useMemo(() => {
+    let filteredTodo = [...todos];
+
+    // 좌측 메뉴 선택 시
+    if(filterOption.category !== 'all') {
+      filteredTodo = filteredTodo.filter(todo => {
+        return todo[filterOption.category] === filterOption.value;
+      })
+    }
+
+    // 검색 시
+    if(filterOption.keyword) {
+      filteredTodo = filteredTodo.filter(todo => {
+        return todo.text.includes(filterOption.keyword);
+      })
+    }
+
+    return filteredTodo;
+
+    // 검색어로 검색
+  }, [todos, filterOption])
   
   return (
     <div className="App">
-        <TodoHeader/>
+        <TodoHeader
+          onSetFilterOption={onSetFilterOption}
+        />
         <div className="TodoBody">
-          <TodoSideMenu/>
+          <TodoSideMenu 
+            onSetFilterOption={onSetFilterOption}
+            filterOption={filterOption}
+          />
           <div className="TodoContentBox">
             <h2>Todo-List</h2>
             <TodoInput onAddTodo={onAddTodo}/>
             <TodoList 
-              todos={todos}
+              todos={filteredTodos}
               onChangeTodo={onChangeTodo}
               onRemoveTodo={onRemoveTodo}
             />
