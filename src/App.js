@@ -28,29 +28,22 @@ const App = () => {
       isImportant: false
     }
 
-    const nextTodos = [...todos, newTodo];
-    setTodos(nextTodos);
+    setTodos(todos => [...todos, newTodo]);
     nextId.current++;
-  }, [todos]);
+  }, []);
 
   const onChangeTodo = useCallback((id, prop, value) => {
-    setTodos(
-      todos.map(
-        todo => {
-          todo[prop] = todo.id === id ? value : todo[prop]
-          return todo;
+    setTodos(todos => 
+      todos.map(todo => { // 불변성 때문에.... 이렇게 수정해야함..
+          return todo.id === id ? {...todo, [prop]: value} : todo;
         }
       )
     );
-  }, [todos]);
+  }, []);
 
   const onRemoveTodo = useCallback((id) => {
-    setTodos(
-      todos.filter(
-        todo => todo.id !== id
-      )
-    )
-  }, [todos])
+    setTodos(todos => todos.filter(todo => todo.id !== id));
+  }, [])
 
   const onSetFilterOption = useCallback(newOption => {
     const newFilterOption = {...filterOption};

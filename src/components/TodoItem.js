@@ -52,4 +52,4 @@ const TodoItem = ({ todo, onChangeTodo, onRemoveTodo }) => {
     );
 };
 
-export default TodoItem;
+export default React.memo(TodoItem);
