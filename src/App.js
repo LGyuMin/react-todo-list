@@ -1,16 +1,32 @@
-import React, { useState, useRef, useCallback, useMemo } from 'react';
+import React, { useState, useRef, useCallback, useMemo, useReducer } from 'react';
 import './App.css';
 import TodoHeader from './components/TodoHeader';
 import TodoSideMenu from './components/TodoSideMenu';
 import TodoInput from './components/TodoInput';
 import TodoList from './components/TodoList';
 
+function todoReducer(todos, action) {
+  switch (action.type) {
+    case 'INSERT':
+      return todos.concat(action.todo);
+    case 'UPDATE':
+      return todos.map(todo => 
+          todo.id === action.id ? {...todo, [action.prop]: action.value} : todo
+      )
+    case 'REMOVE': 
+      return todos.filter(todo => todo.id !== action.id);
+    default:
+      return todos;
+  }
+}
+
 const App = () => {
-  const [ todos, setTodos ] = useState([
-    { id: 1, text: '집가기', isDone: false, isImportant: false },
-    { id: 2, text: '영화 보기', isDone: false, isImportant: false },
-    { id: 3, text: '아무것도 안하기', isDone: true, isImportant: true },
-  ]);
+  const [ todos, dispatch ] = useReducer(todoReducer, [
+      { id: 1, text: '집가기', isDone: false, isImportant: false },
+      { id: 2, text: '영화 보기', isDone: false, isImportant: false },
+      { id: 3, text: '아무것도 안하기', isDone: true, isImportant: true },
+    ]
+  );
 
   const [ filterOption, setFilterOption ] = useState({
       keyword: '', category: 'all', value: true
@@ -28,21 +44,16 @@ const App = () => {
       isImportant: false
     }
 
-    setTodos(todos => [...todos, newTodo]);
+    dispatch({type: 'INSERT', todo: newTodo});
     nextId.current++;
   }, []);
 
   const onChangeTodo = useCallback((id, prop, value) => {
-    setTodos(todos => 
-      todos.map(todo => { // 불변성 때문에.... 이렇게 수정해야함..
-          return todo.id === id ? {...todo, [prop]: value} : todo;
-        }
-      )
-    );
+    dispatch({type: 'UPDATE', id, prop, value});
   }, []);
 
   const onRemoveTodo = useCallback((id) => {
-    setTodos(todos => todos.filter(todo => todo.id !== id));
+    dispatch({type: 'REMOVE', id});
   }, [])
 
   const onSetFilterOption = useCallback(newOption => {
