@@ -2,6 +2,7 @@
     padding: 20px 10px;
     box-sizing: border-box;
     border-bottom: 1px solid #285943;
+    display: flex;
 
     &:after {
         content: '';
@@ -9,10 +10,7 @@
         clear: both;
     }
 
-    >* {
-        float: left;
-        color: #285943;
-    }
+    >* { color: #285943; }
 
     label {
         margin-right: 15px;
@@ -31,7 +29,7 @@
     p {
         cursor: pointer;
         font-weight: bold;
-
+        width: 89%;
         &.selected {
             text-decoration: line-through;
         }
@@ -58,7 +56,7 @@
     }
 
     .iconBox {
-        float: right;
+        margin-left: auto;
 
         i {
             margin-left: 5px;

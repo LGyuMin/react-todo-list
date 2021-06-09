@@ -1,5 +1,6 @@
 import React from 'react';
 import TodoItem from './TodoItem';
+import './TodoList.scss';
 
 const TodoList = ({ todos, onChangeTodo, onRemoveTodo }) => {
     return (
