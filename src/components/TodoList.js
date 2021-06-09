@@ -20,4 +20,4 @@ const TodoList = ({ todos, onChangeTodo, onRemoveTodo }) => {
     );
 };
 
-export default TodoList;
+export default React.memo(TodoList);
