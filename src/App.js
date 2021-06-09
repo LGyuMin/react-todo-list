@@ -20,19 +20,27 @@ function todoReducer(todos, action) {
   }
 }
 
+function createTodos() {
+  const array = [];
+  for(let i=1; i <= 500; i++) {
+    array.push({id: i, text: `할 일${i}`, isDone: false, isImportant: false });
+  }
+  return array;
+}
+
 const App = () => {
-  const [ todos, dispatch ] = useReducer(todoReducer, [
-      { id: 1, text: '집가기', isDone: false, isImportant: false },
-      { id: 2, text: '영화 보기', isDone: false, isImportant: false },
-      { id: 3, text: '아무것도 안하기', isDone: true, isImportant: true },
-    ]
-  );
+  // [
+  //   { id: 1, text: '집가기', isDone: false, isImportant: false },
+  //   { id: 2, text: '영화 보기', isDone: false, isImportant: false },
+  //   { id: 3, text: '아무것도 안하기', isDone: true, isImportant: true },
+  // ]
+  const [ todos, dispatch ] = useReducer(todoReducer, undefined, createTodos);
 
   const [ filterOption, setFilterOption ] = useState({
       keyword: '', category: 'all', value: true
   });
 
-  const nextId = useRef(4);
+  const nextId = useRef(501);
 
   const onAddTodo = useCallback((text) => {
     if(text.trim() === '') return;
