@@ -1,13 +1,10 @@
 import React from 'react';
 import './TodoHeader.scss'
 
-const TodoTemplate = ({ onSetFilterOption }) => {
+const TodoHeader = ({onSetFilter}) => {
     const setKeyword = (e) => {
         const keyword = e.target.value;
-
-        if(e.key === 'Enter') {
-            onSetFilterOption({keyword: keyword});
-        }
+        if(e.key === 'Enter') onSetFilter({keyword});
     }
 
     return (
@@ -18,4 +15,4 @@ const TodoTemplate = ({ onSetFilterOption }) => {
     );
 };
 
-export default TodoTemplate;
+export default TodoHeader;
